@@ -7,5 +7,6 @@ import androidx.room.PrimaryKey
 internal data class Task(
     @PrimaryKey val id: String = java.util.UUID.randomUUID().toString(),
     val title: String,
-    val completed: Boolean = false
+    val completed: Boolean = false,
+    val createdAt: Long = System.currentTimeMillis()
 )

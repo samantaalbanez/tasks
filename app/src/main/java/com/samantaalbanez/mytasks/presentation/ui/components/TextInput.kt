@@ -33,7 +33,7 @@ internal fun TextInput(
     text: String,
     onTextChange: (String) -> Unit,
     onAddClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Box(
         modifier = modifier
@@ -65,6 +65,7 @@ internal fun TextInput(
                     cursorColor = MaterialTheme.colorScheme.primary
                 ),
                 shape = RoundedCornerShape(16.dp),
+                singleLine = true,
                 modifier = Modifier.weight(1f)
             )
 
@@ -72,6 +73,7 @@ internal fun TextInput(
 
             IconButton(
                 onClick = onAddClick,
+                enabled = text.isNotEmpty(),
                 modifier = Modifier
                     .size(40.dp)
                     .clip(CircleShape)

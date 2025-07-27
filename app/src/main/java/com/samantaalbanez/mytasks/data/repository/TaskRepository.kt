@@ -13,8 +13,8 @@ internal class TaskRepository @Inject constructor(private val taskDao: TaskDao) 
         taskDao.insertTask(Task(title = title))
     }
 
-    suspend fun updateTaskToCompleted(task: Task) {
-        taskDao.updateTask(task.copy(completed = !task.completed))
+    suspend fun updateTask(task: Task) {
+        taskDao.updateTask(task)
     }
 
     suspend fun removeTask(task: Task) {

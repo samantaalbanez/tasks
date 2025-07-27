@@ -17,14 +17,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.samantaalbanez.mytasks.data.model.Task
 import com.samantaalbanez.mytasks.presentation.ui.components.CardTask
 import com.samantaalbanez.mytasks.presentation.ui.components.CircleIcon
 import com.samantaalbanez.mytasks.presentation.ui.components.TaskList
 import com.samantaalbanez.mytasks.presentation.ui.components.TextInput
 import com.samantaalbanez.mytasks.presentation.ui.components.Title
+import com.samantaalbanez.mytasks.presentation.viewmodel.TaskUiEvent
 import com.samantaalbanez.mytasks.presentation.viewmodel.TaskViewModel
 import com.samantaalbanez.mytasks.ui.theme.BackGroundColor
 
@@ -32,8 +31,8 @@ import com.samantaalbanez.mytasks.ui.theme.BackGroundColor
 internal fun AddTaskScreen(
     viewModel: TaskViewModel
 ) {
+    val tasks by viewModel.tasks.collectAsState()
     var text by remember { mutableStateOf("") }
-    val isSaveEnabled = text.isNotBlank()
 
     Column(
         modifier = Modifier
@@ -57,9 +56,8 @@ internal fun AddTaskScreen(
                     .padding(horizontal = 16.dp),
                 horizontalArrangement = Arrangement.spacedBy(5.dp)
             ) {
-                CardTask(label = "To do", count = 1, color = Color(0xFFFA897B))
-                CardTask(label = "In progress", count = 2, color = Color(0xFFFFCD38))
-         //       CardTask(label = "Completed", count = 3, color = Color(0xFF90DB86))
+                CardTask(label = "To do", count = tasks.filter { it.completed }.size, color = Color(0xFFFA897B))
+                CardTask(label = "In progress", count = tasks.filter { !it.completed }.size, color = Color(0xFFFFCD38))
             }
 
             Spacer(Modifier.height(30.dp))
@@ -68,7 +66,8 @@ internal fun AddTaskScreen(
                 text = text,
                 onTextChange = { text = it },
                 onAddClick = {
-                    viewModel.addTask(text)
+                    viewModel.onEvent(TaskUiEvent.AddTask(title = text))
+                    text = ""
                 },
                 modifier = Modifier
                     .fillMaxWidth()
@@ -77,8 +76,15 @@ internal fun AddTaskScreen(
 
             Spacer(Modifier.height(10.dp))
 
-            TaskList(viewModel.tasks.collectAsState().value)
-
+            TaskList(
+                tasks = tasks,
+                onCheckedChange = { task ->
+                    viewModel.onEvent(TaskUiEvent.CompleteTask(task))
+                },
+                onSwipeToRemove = { task ->
+                    viewModel.onEvent(TaskUiEvent.RemoveTask(task))
+                }
+            )
         }
     }
 }
