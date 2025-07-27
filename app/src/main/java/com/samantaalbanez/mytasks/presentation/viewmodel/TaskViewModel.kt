@@ -8,10 +8,7 @@ import com.samantaalbanez.mytasks.domain.usecase.CompleteTaskUseCase
 import com.samantaalbanez.mytasks.domain.usecase.DeleteTaskUseCase
 import com.samantaalbanez.mytasks.domain.usecase.GetTasksUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -24,10 +21,7 @@ internal class TaskViewModel @Inject constructor(
     private val deleteTaskUseCase: DeleteTaskUseCase
 ) : ViewModel() {
 
-    private val _uiEvent = MutableStateFlow<TaskUiEvent>(TaskUiEvent.Idle)
-    val uiEvent: StateFlow<TaskUiEvent> = _uiEvent.asStateFlow()
-
-    val tasks = getTasksUseCase.invoke()
+    val tasks = getTasksUseCase()
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), emptyList())
 
     fun onEvent(event: TaskUiEvent) {
