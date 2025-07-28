@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">tasks</string>
+    <string name="title">Olá Samanta Albanez!</string>
+    <string name="add_task">Adicionar uma nova tarefa</string>
+    <string name="task_list_title">Suas tarefas</string>
+    <string name="add">Adicionar</string>
+    <string name="pending">Pendentes</string>
+    <string name="concluded">Concluídas</string>
 </resources>

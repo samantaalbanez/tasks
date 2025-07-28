@@ -24,7 +24,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.samantaalbanez.mytasks.R
 import com.samantaalbanez.mytasks.ui.theme.PrimaryColor
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -42,8 +44,8 @@ internal fun TextInput(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .background(
-                    color = Color(0xFFF5F5F5), // cor de fundo igual a do Figma
-                    shape = RoundedCornerShape(16.dp) // cantos arredondados
+                    color = Color(0xFFF5F5F5),
+                    shape = RoundedCornerShape(16.dp)
                 )
                 .padding(horizontal = 8.dp, vertical = 4.dp)
                 .fillMaxWidth()
@@ -53,7 +55,7 @@ internal fun TextInput(
                 onValueChange = onTextChange,
                 placeholder = {
                     Text(
-                        "Add a new task",
+                        text = stringResource(R.string.add_task),
                         color = Color(0xFF868686)
                     )
                 },
@@ -81,7 +83,7 @@ internal fun TextInput(
             ) {
                 Icon(
                     imageVector = Icons.Default.Add,
-                    contentDescription = "Add",
+                    contentDescription = stringResource(R.string.add),
                     tint = Color.White
                 )
             }

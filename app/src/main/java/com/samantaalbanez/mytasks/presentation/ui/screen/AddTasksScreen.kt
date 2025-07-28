@@ -16,8 +16,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.samantaalbanez.mytasks.R
 import com.samantaalbanez.mytasks.presentation.ui.components.CardTask
 import com.samantaalbanez.mytasks.presentation.ui.components.CircleIcon
 import com.samantaalbanez.mytasks.presentation.ui.components.TaskList
@@ -26,6 +27,8 @@ import com.samantaalbanez.mytasks.presentation.ui.components.Title
 import com.samantaalbanez.mytasks.presentation.viewmodel.TaskUiEvent
 import com.samantaalbanez.mytasks.presentation.viewmodel.TaskViewModel
 import com.samantaalbanez.mytasks.ui.theme.BackGroundColor
+import com.samantaalbanez.mytasks.ui.theme.CardConcludedColor
+import com.samantaalbanez.mytasks.ui.theme.CardPendingColor
 
 @Composable
 internal fun AddTaskScreen(
@@ -46,7 +49,7 @@ internal fun AddTaskScreen(
                 .padding(24.dp),
             verticalArrangement = Arrangement.SpaceBetween
         ) {
-            Title("Olá Samanta Albanez!")
+            Title(stringResource(R.string.title))
 
             Spacer(Modifier.height(24.dp))
 
@@ -56,8 +59,16 @@ internal fun AddTaskScreen(
                     .padding(horizontal = 16.dp),
                 horizontalArrangement = Arrangement.spacedBy(5.dp)
             ) {
-                CardTask(label = "To do", count = tasks.filter { it.completed }.size, color = Color(0xFFFA897B))
-                CardTask(label = "In progress", count = tasks.filter { !it.completed }.size, color = Color(0xFFFFCD38))
+                CardTask(
+                    label = stringResource(R.string.pending),
+                    count = tasks.filter { it.completed }.size,
+                    color = CardConcludedColor
+                )
+                CardTask(
+                    label = stringResource(R.string.concluded),
+                    count = tasks.filter { !it.completed }.size,
+                    color = CardPendingColor
+                )
             }
 
             Spacer(Modifier.height(30.dp))

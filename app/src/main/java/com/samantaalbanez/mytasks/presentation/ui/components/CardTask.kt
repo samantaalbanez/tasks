@@ -20,8 +20,8 @@ import androidx.compose.ui.unit.dp
 fun CardTask(label: String, count: Int, color: Color) {
     Card(
         modifier = Modifier
-            .width(100.dp)
-            .height(78.dp),
+            .width(110.dp)
+            .height(84.dp),
         colors = CardDefaults.cardColors(containerColor = color)
     ) {
         Column(
@@ -31,10 +31,12 @@ fun CardTask(label: String, count: Int, color: Color) {
         ) {
             Text(
                 text = count.toString(),
+                maxLines = 1,
                 style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold), color = Color.White
             )
             Text(
-                text = label, style = MaterialTheme.typography.labelMedium, color = Color.White
+                text = label, style = MaterialTheme.typography.labelMedium, color = Color.White,
+                maxLines = 1,
             )
         }
     }

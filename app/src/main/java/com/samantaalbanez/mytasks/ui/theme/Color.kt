@@ -4,6 +4,8 @@ import androidx.compose.ui.graphics.Color
 
 val BackGroundColor = Color(0xFFEDEDED)
 val PrimaryColor = Color(0x9555847A)
+val CardConcludedColor = Color(0xFFFA897B)
+val CardPendingColor = Color(0xFFFFCD38)
 val Purple80 = Color(0xFFD0BCFF)
 val PurpleGrey80 = Color(0xFFCCC2DC)
 val Pink80 = Color(0xFFEFB8C8)

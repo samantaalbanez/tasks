@@ -33,12 +33,6 @@ internal class TaskViewModel @Inject constructor(
         }
     }
 
-    private fun getTasks() {
-        viewModelScope.launch {
-            getTasksUseCase()
-        }
-    }
-
     private fun deleteTask(task: Task) {
         viewModelScope.launch {
             deleteTaskUseCase.invoke(task)
