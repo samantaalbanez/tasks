@@ -88,5 +88,3 @@ internal fun AddTaskScreen(
         }
     }
 }
-
-

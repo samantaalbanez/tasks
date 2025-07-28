@@ -43,7 +43,7 @@ internal fun TaskList(
             contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
             modifier = Modifier.weight(1f)
         ) {
-            items(tasks) { task ->
+            items(tasks, key = { it.id }) { task ->
                 TaskItem(
                     task = task,
                     onCheckedChange = onCheckedChange,
