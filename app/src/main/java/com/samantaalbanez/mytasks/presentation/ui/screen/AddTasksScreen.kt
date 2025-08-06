@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -35,12 +37,12 @@ internal fun AddTaskScreen(
     viewModel: TaskViewModel
 ) {
     val tasks by viewModel.tasks.collectAsState()
-    var text by remember { mutableStateOf("") }
+    val text by remember { viewModel.text }
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(BackGroundColor),
+            .background(BackGroundColor)
     ) {
         CircleIcon()
         Column(
@@ -75,10 +77,10 @@ internal fun AddTaskScreen(
 
             TextInput(
                 text = text,
-                onTextChange = { text = it },
+                onTextChange = { viewModel.updateText(it) },
                 onAddClick = {
                     viewModel.onEvent(TaskUiEvent.AddTask(title = text))
-                    text = ""
+                    viewModel.updateText(textValue = "")
                 },
                 modifier = Modifier
                     .fillMaxWidth()

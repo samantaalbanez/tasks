@@ -1,5 +1,6 @@
 package com.samantaalbanez.mytasks.presentation.viewmodel
 
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.samantaalbanez.mytasks.data.model.Task
@@ -21,6 +22,9 @@ internal class TaskViewModel @Inject constructor(
     private val deleteTaskUseCase: DeleteTaskUseCase
 ) : ViewModel() {
 
+    var text = mutableStateOf("")
+        private set
+
     val tasks = getTasksUseCase()
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(), emptyList())
 
@@ -31,6 +35,10 @@ internal class TaskViewModel @Inject constructor(
             is TaskUiEvent.RemoveTask -> deleteTask(event.task)
             is TaskUiEvent.Idle -> Unit
         }
+    }
+
+    fun updateText(textValue: String) {
+        text.value = textValue
     }
 
     private fun deleteTask(task: Task) {
