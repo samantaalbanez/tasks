@@ -13,3 +13,6 @@ Android application for task management.
 - MVVM Architecture
 - Hilt
 - Room
+
+## Screenshoot
+<img width="253" height="563" alt="Captura de Tela 2025-08-05 às 21 44 08" src="https://github.com/user-attachments/assets/8842ec2f-ca3f-4615-a2e2-724b5fbb3849" />
