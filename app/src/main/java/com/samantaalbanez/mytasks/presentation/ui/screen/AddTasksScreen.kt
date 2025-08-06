@@ -61,12 +61,12 @@ internal fun AddTaskScreen(
             ) {
                 CardTask(
                     label = stringResource(R.string.pending),
-                    count = tasks.filter { it.completed }.size,
+                    count = tasks.filter { !it.completed }.size,
                     color = CardConcludedColor
                 )
                 CardTask(
                     label = stringResource(R.string.concluded),
-                    count = tasks.filter { !it.completed }.size,
+                    count = tasks.filter { it.completed }.size,
                     color = CardPendingColor
                 )
             }
